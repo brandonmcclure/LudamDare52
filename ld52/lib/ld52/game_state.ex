@@ -1,4 +1,4 @@
-defmodule Ld52Web.GameState do
+defmodule Ld52.GameState do
   use Ecto.Schema
   import Ecto.Changeset
 
