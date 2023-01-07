@@ -18,7 +18,9 @@ defmodule Ld52Web.Router do
   scope "/", Ld52Web do
     pipe_through :browser
 
+    #dbg("routing live")
     live "/", PageLive
+    live "/:id", PageLive
   end
 
   # Other scopes may use custom stacks.
