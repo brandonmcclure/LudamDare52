@@ -4,7 +4,7 @@ defmodule Ld52.Repo.Migrations.AddGamestateTable do
   def change do
     create table(:game_state, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :counter, :float
+      add :counter, :integer
 
       timestamps()
     end
