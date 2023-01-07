@@ -13,6 +13,7 @@ on:
 # Sets the ENV `MIX_ENV` to `test` for running tests
 env:
   MIX_ENV: test
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 permissions:
   contents: read
@@ -110,3 +111,14 @@ jobs:
     # # Step: Execute the tests.
     # - name: Run tests
     #   run: mix test
+  deploy:
+      needs: test
+      defaults:
+        run:
+          working-directory: ld52
+      name: Deploy app
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+        - run: flyctl deploy --remote-only
