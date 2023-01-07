@@ -1,9 +1,12 @@
 defmodule Ld52Web.PageLive do
   use Ld52Web, :live_view
-  alias Ld52.{Repo,GameState}
+  alias Ld52.{Repo,GameState,ServerState}
 
-  def mount(%{"id" => _} = _params, _session, socket) do
+  def mount(%{"id" => id} = _params, _session, socket) do
     dbg("Existing game")
+    game_state = Repo.get!(GameState, id)
+    server_state = Repo.get!(ServerState, 1)
+    socket = assign(socket,%{game: game_state, serverstate: server_state})
     {:ok, socket}
   end
   def mount(_param, _session, socket) do
@@ -37,6 +40,7 @@ defmodule Ld52Web.PageLive do
 
   def handle_event("inc",_params,socket) do
     dbg("increment")
+    dbg(socket.assigns.game)
     new_state =
       Ecto.Changeset.change(socket.assigns.game, %{
         counter: socket.assigns.game.counter + 1
@@ -70,8 +74,9 @@ defmodule Ld52Web.PageLive do
     dbg("handle_params id")
     dbg(id)
     game_state = Repo.get!(GameState, id)
+    server_state = Repo.get!(ServerState, 1)
     dbg(game_state)
-    socket = assign(socket, %{game: game_state})
+    socket = assign(socket, %{game: game_state, serverstate: server_state})
     #:timer.send_interval(1000, self(), :tick)
     dbg("done handling")
     {:noreply, socket}

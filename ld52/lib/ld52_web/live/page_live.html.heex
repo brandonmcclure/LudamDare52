@@ -1,3 +1,7 @@
+<%= if assigns[:serverstate] do %>
+    <h1 class="text-5xl font-medium text-gray-700">Game hours since server started: <%= @serverstate.hourssincecreation %></h1>
+	<% end %>
+
 <div class="flex flex-col items-center justify-center h-screen bg-gray-200">
   <h1 class="text-5xl font-medium text-gray-700">Foods Harvested</h1>
 

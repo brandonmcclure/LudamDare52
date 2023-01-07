@@ -1,9 +1,9 @@
-defmodule Ld52.GameState do
+defmodule Ld52.ServerState do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: false}
-  @foreign_key_type :binary_id
+  @primary_key {:id, :integer, autogenerate: false}
+  @foreign_key_type :integer
   schema "server_state" do
     field :hourssincecreation, :integer
     field :realsecondspergamehour, :integer
@@ -13,7 +13,7 @@ defmodule Ld52.GameState do
   @doc false
   def changeset(server_state, attrs) do
     server_state
-    |> cast(attrs, [:hourspast])
-    |> validate_required([:hourspast])
+    |> cast(attrs, [:hourspast, :realsecondspergamehour])
+    |> validate_required([:hourspast, :realsecondspergamehour])
   end
 end
