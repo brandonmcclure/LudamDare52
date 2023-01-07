@@ -2,7 +2,9 @@
   <h1 class="text-5xl font-medium text-gray-700">Counter</h1>
 
   <span class="m-5 text-9xl">
-    <%= @number %>
+	<%= if assigns[:game] do %>
+    <%= @game.counter %>
+	<% end %>
   </span>
 
   <section>

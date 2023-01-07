@@ -12,6 +12,10 @@ all: lint
 run: elixir_run
 test: elixir_test
 # elixir/mix
+elixir_clean:
+	cd $(ELIXIR_SOURCE_PATH); mix ecto.drop
+elixir_migrate:
+	cd $(ELIXIR_SOURCE_PATH); mix ecto.migrate
 elixir_deps:
 	cd $(ELIXIR_SOURCE_PATH); mix deps.get
 	cd $(ELIXIR_SOURCE_PATH); mix tailwind.install
