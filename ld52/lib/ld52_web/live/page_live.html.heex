@@ -1,5 +1,9 @@
 <%= if assigns[:serverstate] do %>
-    <h1 class="text-5xl font-medium text-gray-700">Game hours since server started: <%= @serverstate.hourssincecreation %></h1>
+    <h1 class="text-5xl font-medium text-gray-700">Serverstate</h1>
+	<h2 class="text-5xl font-medium text-gray-700">total game hours since server started: <%= @serverstate.hourssincecreation %></h2>
+	<h2 class="text-5xl font-medium text-gray-700">Game time: <%= (@serverstate.hourssincecreation /24)|> Decimal.from_float()|> Decimal.round(0)%> days, and <%= @serverstate.hourssincecreation
+	|> rem(24) %>hours
+	</h2>
 	<% end %>
 
 <div class="flex flex-col items-center justify-center h-screen bg-gray-200">
@@ -12,10 +16,6 @@
   </span>
 
   <section>
-    <button phx-click="dec" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">-</button>
-
-    <button phx-click="clear" class="m-10 text-white text-4xl bg-indigo-900 px-6 py-4 rounded hover:bg-indigo-500">clear</button>
-
     <button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">+</button>
   </section>
 </div>

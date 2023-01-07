@@ -56,6 +56,6 @@ defmodule Ld52.Periodically do
   end
 
   defp schedule_work() do
-    Process.send_after(self(), :work, 20 * 1000) # In 2 minutes
+    Process.send_after(self(), :work, ((Repo.get!(ServerState, 1)).realsecondspergamehour) * 1000)
   end
 end
