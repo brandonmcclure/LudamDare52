@@ -6,6 +6,7 @@ endif
 
 .SHELLFLAGS := -NoProfile -Command
 ELIXIR_SOURCE_PATH := ld52/
+GITHUB_TOKEN :=
 .PHONY: all lint clean test act run
 
 all: lint
@@ -20,18 +21,19 @@ elixir_deps:
 	cd $(ELIXIR_SOURCE_PATH); mix deps.get
 	cd $(ELIXIR_SOURCE_PATH); mix tailwind.install
 	cd $(ELIXIR_SOURCE_PATH); mix ecto.create
-elixir_run:
+elixir_run: elixir_deps
 	cd $(ELIXIR_SOURCE_PATH); mix phx.server
 elixir_runi:
-	cd $(ELIXIR_SOURCE_PATH); iex -S mix phx.server
+	Remove-Alias -Name iex -force; cd $(ELIXIR_SOURCE_PATH); iex -S mix phx.server
 elixir_test: elixir_deps
 	cd $(ELIXIR_SOURCE_PATH); mix test
 # Act/github workflows
 ACT_ARTIFACT_PATH := /workspace/.act 
-act: lint
+act: act_lint act_lfs
 act_lint:
-	act --artifact-server-path $(ACT_ARTIFACT_PATH)
-
+	act -j lint --artifact-server-path $(ACT_ARTIFACT_PATH)
+act_lfs:
+	act -s GITHUB_TOKEN=$(GITHUB_TOKEN) -j lfsvalidate --artifact-server-path $(ACT_ARTIFACT_PATH)
 # Linting
 lint: lint_mega
 
@@ -43,5 +45,4 @@ lint_goodcheck_test:
 	docker run -t --rm -v $${PWD}:/work sider/goodcheck test
 lint_makefile:
 	docker run -v $${PWD}:/tmp/lint -e ENABLE_LINTERS=MAKEFILE_CHECKMAKE oxsecurity/megalinter-ci_light:v6.10.0
-clean:
-	'Not implemented'
+clean: elixir_clean
