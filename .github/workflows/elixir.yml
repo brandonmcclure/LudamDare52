@@ -112,6 +112,9 @@ jobs:
     # - name: Run tests
     #   run: mix test
   deploy:
+      defaults:
+        run:
+          working-directory: ld52
       name: Deploy app
       runs-on: ubuntu-latest
       steps:
