@@ -14,12 +14,13 @@ test: elixir_test
 # elixir/mix
 elixir_deps:
 	cd $(ELIXIR_SOURCE_PATH); mix deps.get
+	cd $(ELIXIR_SOURCE_PATH); mix tailwind.install
 	cd $(ELIXIR_SOURCE_PATH); mix ecto.create
 elixir_run:
 	cd $(ELIXIR_SOURCE_PATH); mix phx.server
 elixir_runi:
 	cd $(ELIXIR_SOURCE_PATH); iex -S mix phx.server
-elixir_test:
+elixir_test: elixir_deps
 	cd $(ELIXIR_SOURCE_PATH); mix test
 # Act/github workflows
 ACT_ARTIFACT_PATH := /workspace/.act 

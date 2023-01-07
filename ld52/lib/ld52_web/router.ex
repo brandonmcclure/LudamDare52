@@ -1,5 +1,6 @@
 defmodule Ld52Web.Router do
   use Ld52Web, :router
+  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,7 +18,7 @@ defmodule Ld52Web.Router do
   scope "/", Ld52Web do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive
   end
 
   # Other scopes may use custom stacks.
