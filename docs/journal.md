@@ -2,6 +2,12 @@
 
 Lets keep a journal of my development experience!
 
+## 1/7 16:20
+
+I have not worked on it since noon today. I spent too much time on fly.io. Alternative is to host a VM on azure via terraform. 
+
+I also need to work on the css grid, and the pubsub and passage of time mechanic.
+
 ## 1/7 12:00
 
 Spent the morning working on getting fly.io deployment working via [pr 3](https://github.com/brandonmcclure/LudamDare52/pull/3) no luck. Did get it to run on my Arch linux laptop!
