@@ -1,9 +1,4 @@
-@import url("tailwindcss/base");
-@import url("tailwindcss/components");
-@import url("tailwindcss/utilities");
 
-/* This file is for your main application CSS */
-@import url("./phoenix.css");
 
 /* Alerts and form errors used by phx.new */
 .alert {
@@ -98,3 +93,4 @@
   text-decoration: none;
   cursor: pointer;
 }
+

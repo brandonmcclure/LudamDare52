@@ -14,6 +14,7 @@ defmodule Ld52.Application do
       Ld52Web.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Ld52.PubSub},
+      Ld52.Periodically,
       # Start the Endpoint (http/https)
       Ld52Web.Endpoint
       # Start a worker by calling: Ld52.Worker.start_link(arg)

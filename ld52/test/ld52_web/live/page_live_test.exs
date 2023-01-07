@@ -3,12 +3,12 @@ defmodule Ld52Web.PageLiveTest do
   import Phoenix.LiveViewTest
 
   test "disconnect and connect render",%{conn: conn} do
-    {:ok, page_live, disconnected_html}= live(conn,"/")
+    {:ok, page_live, disconnected_html}= live(conn,"/test")
     assert disconnected_html =~ "0"
     assert render(page_live) =~ "0"
   end
   test "inc dec",%{conn: conn}  do
-    {:ok, page_live, _html}= live(conn,"/")
+    {:ok, page_live, _html}= live(conn,"/test")
 
     assert render_click(page_live, :inc,%{}) =~ "1"
     assert render_click(page_live, :inc,%{}) =~ "2"
@@ -16,7 +16,7 @@ defmodule Ld52Web.PageLiveTest do
   end
 
   test "clear event",%{conn: conn}  do
-    {:ok, page_live, _html}= live(conn,"/")
+    {:ok, page_live, _html}= live(conn,"/test")
 
     assert render_click(page_live, :inc,%{}) =~ "1"
     assert render_click(page_live, :clear,%{}) =~ "0"

@@ -2,6 +2,16 @@
 
 Lets keep a journal of my development experience!
 
+## 1/7 00:00
+
+I know more about GenServer now, which is helping me conceptualize phoenix better I think. setup a periodically module that will keep track of time passed on the server. The growth rate from each game will be tied to this server value. 
+
+Tried to deploy to fly.io. I think it is having issues because I am running inside a devcontainer, and it cannot communicate over ipv6 to the postgres db instance it deploys. 
+
+remove tailwind. makes the page ugly, but there were several errors that prevented fly.io from building
+
+started making some moon graphics for use to indicate the passage of time.
+
 ## 1/6 22:00
 
 A few distractions, but I got a bunch of dbg logging through out. And I got the game session management working. For some reason I cannot run this in firefox anymore. The websocket will fail to connect, and the session reset. Edge works great.

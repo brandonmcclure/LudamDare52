@@ -26,14 +26,6 @@ config :ld52, Ld52Web.Endpoint,
 # at the `config/runtime.exs`.
 config :ld52, Ld52.Mailer, adapter: Swoosh.Adapters.Local
 
-config :tailwind, version: "3.2.4", default: [
-  args: ~w(
-    --config=tailwind.config.js
-    --input=css/app.css
-    --output=../priv/static/assets/app.css
-  ),
-  cd: Path.expand("../assets", __DIR__)
-]
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
