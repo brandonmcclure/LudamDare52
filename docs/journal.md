@@ -4,7 +4,7 @@ Lets keep a journal of my development experience!
 
 ## 1/6 22:00
 
-A few distractions, but I got a bunch of dbg logging through out. And I got the game session managment working. For some reason I canno run this in firefox anymore. The websocket will fail to connect, and the session reset. Edge works great. 
+A few distractions, but I got a bunch of dbg logging through out. And I got the game session management working. For some reason I cannot run this in firefox anymore. The websocket will fail to connect, and the session reset. Edge works great.
 
 ## 1/6 19:00
 
