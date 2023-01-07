@@ -51,7 +51,8 @@ RUN apt-get update \
 
 RUN su ${USERNAME} -c "mix local.hex --force \
   && mix local.rebar --force \
-  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}"
+  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}" \
+  && curl -L https://fly.io/install.sh | sh
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \

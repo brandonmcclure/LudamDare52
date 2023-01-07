@@ -1,2 +1,3 @@
 megalinter-reports/*
 .act/*
+ld52/rel/overlays/bin/*

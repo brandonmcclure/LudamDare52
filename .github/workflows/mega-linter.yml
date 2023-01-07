@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  lint:
     name: MegaLinter
     runs-on: ubuntu-latest
     steps:

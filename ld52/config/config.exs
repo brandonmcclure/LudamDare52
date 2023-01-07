@@ -26,6 +26,7 @@ config :ld52, Ld52Web.Endpoint,
 # at the `config/runtime.exs`.
 config :ld52, Ld52.Mailer, adapter: Swoosh.Adapters.Local
 
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
