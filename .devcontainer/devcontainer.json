@@ -22,6 +22,7 @@
   // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
   //"remoteUser": "vscode",
   "features": {
+	"ghcr.io/devcontainers/features/git-lfs:1":{},
     "ghcr.io/dhoeric/features/act:1": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
