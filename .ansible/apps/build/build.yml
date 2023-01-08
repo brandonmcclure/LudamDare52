@@ -18,7 +18,7 @@
       git:
         repo: "{{ git_repo }}"
         dest: "{{ local_build_dir }}"
-        version: main
+        version: dockerbuild
         force: yes
       when: ansible_connection == "docker"
 

@@ -17,15 +17,11 @@
   environment:
     MIX_ENV: "{{ mix_env }}"
 
-- name: Fetch npm dependencies
-  command: bash -lc "cd {{ build_dir }}/assets && npm install"
-  environment:
-    MIX_ENV: "{{ mix_env }}"
 
-- name: Build assets
-  command: bash -lc "cd {{ build_dir }}/assets && npm run deploy"
-  environment:
-    MIX_ENV: "{{ mix_env }}"
+# - name: Build assets
+#   command: bash -lc "cd {{ build_dir }}/assets && npm run deploy"
+#   environment:
+#     MIX_ENV: "{{ mix_env }}"
 
 - name: Digest assets
   command: bash -lc "mix phx.digest" chdir="{{ build_dir }}"

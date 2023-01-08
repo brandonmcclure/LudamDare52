@@ -27,14 +27,14 @@ RUN git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.10.2
 
 # Install erlang
 RUN asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
-    asdf install erlang 22.0.2 && \
-    asdf global erlang 22.0.2 && \
+    asdf install erlang 25.0 && \
+    asdf global erlang 25.0 && \
     rm -rf  /tmp/*
 
 # Install elixir
 RUN asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
-    asdf install elixir 1.9.0 && \
-    asdf global elixir 1.9.0 && \
+    asdf install elixir 1.14.2-otp-25 && \
+    asdf global elixir 1.14.2-otp-25 && \
     rm -rf  /tmp/*
 
 # Install hex and rebar
