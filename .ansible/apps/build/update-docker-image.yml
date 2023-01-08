@@ -1,0 +1,12 @@
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Build and upload docker image
+      community.docker.docker_image:
+         build:
+          path: ./
+         name: bmcclure89/phoenix-build-elixir-ubuntu18:latest
+         push: true
+         source: build

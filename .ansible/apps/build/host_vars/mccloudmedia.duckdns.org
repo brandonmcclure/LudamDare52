@@ -1,0 +1,8 @@
+---
+database_name: "ld52"
+database_username: "postgres"
+secret_key_base: "asdfg"
+database_password: "postgres"
+releases_dir: "/u/apps/ansible_phoenix_build/releases"
+current_dir: "/u/apps/ansible_phoenix_build/current"
+releases_to_keep: 10
