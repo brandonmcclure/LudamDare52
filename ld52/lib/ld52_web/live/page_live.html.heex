@@ -1,13 +1,12 @@
-<%= if assigns[:serverstate] do %>
-    <h1 class="text-5xl font-medium text-gray-700">Serverstate</h1>
-	<h2 class="text-5xl font-medium text-gray-700">total game hours since server started: <%= @serverstate.hourssincecreation %></h2>
-	<h2 class="text-5xl font-medium text-gray-700">Game time: <%= (@serverstate.hourssincecreation /24)|> Decimal.from_float()|> Decimal.round(0)%> days, and <%= @serverstate.hourssincecreation
-	|> rem(24) %>hours
-	</h2>
-	<% end %>
-
 <div class="flex flex-col items-center justify-center h-screen bg-gray-200">
-  <h1 class="text-5xl font-medium text-gray-700">Foods Harvested</h1>
+  
+  <div class="wrapper">
+
+<div class="box a">
+
+<section class="container">
+
+<h1 class="text-5xl font-medium text-gray-700">Foods Harvested</h1>
 
   <span class="m-5 text-9xl">
 	<%= if assigns[:game] do %>
@@ -15,7 +14,27 @@
 	<% end %>
   </span>
 
+</section>
+
+</div>
+
+<div class="box b"><%= if assigns[:serverstate] do %>
+    <h3 class="text-5xl font-medium text-gray-700">Serverstate</h3>
+	<h4 class="text-5xl font-medium text-gray-700">total game hours since server started: <%= @serverstate.hourssincecreation %></h4>
+	<h4 class="text-5xl font-medium text-gray-700">Game time: <%= (@serverstate.hourssincecreation /24)|> Decimal.from_float()|> Decimal.round(0)%> days, and <%= @serverstate.hourssincecreation
+	|> rem(24) %>hours
+	</h4>
+	<% end %></div>
+
+<div class="box c"><section class="container">
+
   <section>
-    <button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">+</button>
+    <button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">Click here to harvest food</button>
   </section>
+
+</section>
+
+</div>
+
+</div>
 </div>
