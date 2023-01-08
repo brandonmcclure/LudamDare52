@@ -1,4 +1,4 @@
-# fly.toml file generated for ld52 on 2023-01-07T06:22:00Z
+# fly.toml file generated for ld52 on 2023-01-07T20:42:14Z
 
 app = "ld52"
 kill_signal = "SIGTERM"
@@ -39,5 +39,6 @@ processes = []
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
+    port = "8080"
     restart_limit = 0
     timeout = "2s"

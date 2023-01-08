@@ -2,6 +2,18 @@
 
 Lets keep a journal of my development experience!
 
+## 1/7 16:20
+
+I have not worked on it since noon today. I spent too much time on fly.io. Alternative is to host a VM on azure via terraform. 
+
+I also need to work on the css grid, and the pubsub and passage of time mechanic.
+
+## 1/7 12:00
+
+Spent the morning working on getting fly.io deployment working via [pr 3](https://github.com/brandonmcclure/LudamDare52/pull/3) no luck. Did get it to run on my Arch linux laptop!
+
+Wrote a ServerState struct/ecto changeset that will hold how many game hours have passed.
+
 ## 1/7 00:00
 
 I know more about GenServer now, which is helping me conceptualize phoenix better I think. setup a periodically module that will keep track of time passed on the server. The growth rate from each game will be tied to this server value. 
