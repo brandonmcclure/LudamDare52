@@ -48,10 +48,12 @@ RUN apt-get update \
   && apt-get autoremove -y \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh
-
+ENV FLYCTL_INSTALL=/opt/flyctl
 RUN su ${USERNAME} -c "mix local.hex --force \
   && mix local.rebar --force \
   && mix archive.install --force hex phx_new ${PHOENIX_VERSION}" \
+  && mix local.hex --force \
+  && mix local.rebar --force \
   && curl -L https://fly.io/install.sh | sh
 
 # [Optional] Uncomment this section to install additional OS packages.

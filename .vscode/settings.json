@@ -1,0 +1,19 @@
+{
+	"elixirLS.projectDir":"ld52",
+	"css.format.enable":true,
+	"css.format.newlineBetweenSelectors":true,
+	"files.associations": {
+		"*.heex": "phoenix-heex",
+		// ...
+	  },
+	  
+	  "[elixir]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "JakeBecker.elixir-ls"
+	  },
+	  
+	  "[phoenix-heex]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "JakeBecker.elixir-ls"
+	  },
+}
