@@ -13,6 +13,7 @@ on:
 # Sets the ENV `MIX_ENV` to `test` for running tests
 env:
   MIX_ENV: test
+  IMAGE_NAME: ld52
 
 permissions:
   contents: read
