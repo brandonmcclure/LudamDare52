@@ -13,6 +13,7 @@ on:
 # Sets the ENV `MIX_ENV` to `test` for running tests
 env:
   MIX_ENV: test
+  IMAGE_NAME: ld52
 
 permissions:
   contents: read
@@ -110,3 +111,48 @@ jobs:
     # # Step: Execute the tests.
     # - name: Run tests
     #   run: mix test
+  build-and-push-image:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Github Container registry
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@57396166ad8aefe6098280995947635806a0e6ea
+        with:
+          tags: |
+            type=ref,event=pr
+            type=ref,event=branch
+            type=sha,format=long
+            type=raw,value=latest
+          images: |
+            ghcr.io/brandonmcclure/LudamDare52/${{ env.IMAGE_NAME }}
+          labels: ${{ steps.meta.outputs.labels }} 
+      - name: Build Docker image (non main branch)
+        uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+        if: github.ref != 'refs/heads/main'
+        with:
+          context: ld52/.
+          load: false
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }} 
+      - name: Build and push Docker image (main branch)
+        uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+        if: github.ref == 'refs/heads/main'
+        with:
+          context: ld52/.
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
