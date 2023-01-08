@@ -30,7 +30,14 @@
 <h2>Farm plots</h2>
 <div class="wrapper_4x3 box">
 <div style ="grid-column:1; grid-row:1";>
-    <button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">Click here to harvest food</button>
+<%= if @plot1_1_harvestable do %>
+	<button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">Click here to harvest food</button>
+<% else %>
+    <button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900" disabled> 
+        Click here to harvest food
+    </button>
+<% end %>
+    
   
 </div>
 <div style ="grid-column:1;grid-row:2">

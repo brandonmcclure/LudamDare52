@@ -7,7 +7,7 @@ defmodule Ld52Web.PageLive do
     #dbg("Existing game")
     game_state = Repo.get!(GameState, id)
     server_state = Repo.get!(ServerState, 1)
-    socket = assign(socket,%{game: game_state, serverstate: server_state})
+    socket = assign(socket,%{game: game_state, serverstate: server_state,plot1_1_harvestable: true})
     {:ok, socket}
   end
   def mount(_param, _session, socket) do
@@ -21,7 +21,7 @@ defmodule Ld52Web.PageLive do
 
         case Repo.insert(%GameState{counter: 0}) do
           {:ok, game_state} ->
-            socket = assign(socket, %{game: game_state})
+            socket = assign(socket, %{game: game_state, plot1_1_harvestable: true})
             push_redirect(socket, to: "/" <> game_state.id)
 
           {:error, _changeset} ->
@@ -40,7 +40,7 @@ defmodule Ld52Web.PageLive do
 
   end
   def handle_info({:serverstate, state}, socket) do
-    {:noreply, socket |> assign(:serverstate, state)}
+    {:noreply, socket |> assign(:serverstate, state) |> assign(:plot1_1_harvestable, true)}
 end
 def handle_state_transition() do
 
@@ -54,7 +54,7 @@ end
       })
 
     game_state = Repo.update!(new_state)
-    {:noreply, assign(socket, :game, game_state)}
+    {:noreply, socket |> assign(:game, game_state) |> assign(:plot1_1_harvestable, false)}
   end
 
 
