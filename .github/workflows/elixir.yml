@@ -145,7 +145,7 @@ jobs:
         with:
           context: ld52/.
           load: true
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }} 
       - name: Build and push Docker image (main branch)
