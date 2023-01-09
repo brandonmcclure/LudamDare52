@@ -9,8 +9,8 @@
 <h1 class="text-5xl font-medium text-gray-700">Foods Harvested</h1>
 
   <span class="m-5 text-9xl">
-	<%= if assigns[:game] do %>
-    <%= @game.counter %>
+	<%= if assigns[:game_state] do %>
+    <%= @game_state.counter %>
 	<% end %>
   </span>
 
@@ -29,6 +29,9 @@
 <div class="box c">
 <h2>Farm plots</h2>
 <div class="wrapper_4x3 box">
+<%= if @game_state.plot_states do %>
+ploties
+<% end %>
 <div style ="grid-column:1; grid-row:1";>
 <%= if @plot1_1_harvestable do %>
 	<button phx-click="inc" class="text-white text-4xl bg-indigo-600 px-6 py-4 rounded hover:bg-indigo-900">Click here to harvest food</button>
@@ -37,8 +40,6 @@
         Click here to harvest food
     </button>
 <% end %>
-    
-  
 </div>
 <div style ="grid-column:1;grid-row:2">
 

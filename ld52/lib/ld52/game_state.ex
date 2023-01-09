@@ -7,6 +7,7 @@ defmodule Ld52.GameState do
   schema "game_state" do
     field :counter, :integer
     timestamps()
+    has_many(:plot_states, Ld52.PlotState)
   end
 
   @doc false
