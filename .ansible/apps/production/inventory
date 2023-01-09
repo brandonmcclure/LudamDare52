@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    example.com
+  vars:
+    local_build_dir: /tmp/ansible_phoenix_build
+    ansible_user: deploy

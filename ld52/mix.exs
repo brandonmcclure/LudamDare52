@@ -4,12 +4,18 @@ defmodule Ld52.MixProject do
   def project do
     [
       app: :ld52,
-      version: "0.1.0",
+      version: System.get_env("BUILD_VERSION") || "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        ld52: [
+          include_executables_for: [:unix],
+          applications: [runtime_tools: :permanent]
+        ],
+      ]
     ]
   end
 
