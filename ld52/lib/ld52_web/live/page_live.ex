@@ -1,79 +1,123 @@
 defmodule Ld52Web.PageLive do
   use Ld52Web, :live_view
-  alias Ld52.{Repo,GameState,ServerState}
+  alias Ld52.{Repo, GameState, ServerState, PlotState}
   alias Phoenix.PubSub
 
   def mount(%{"id" => id} = _params, _session, socket) do
-    #dbg("Existing game")
-    game_state = Repo.get!(GameState, id)
+    dbg("Existing game")
+
+    socket =
+      socket
+      |> get_game_state(id)
+
+    game_state = socket.assigns.game_state
+    # Repo.preload(game_state, [:plot_states])
     server_state = Repo.get!(ServerState, 1)
-    socket = assign(socket,%{game: game_state, serverstate: server_state,plot1_1_harvestable: true})
+
+    socket =
+      assign(socket, %{
+        game_state: game_state,
+        serverstate: server_state,
+        plot1_1_harvestable: true
+      })
+
     {:ok, socket}
   end
+
   def mount(_param, _session, socket) do
-    #dbg(socket)
-    #dbg(connected?(socket))
+    # dbg(socket)
+    # dbg(connected?(socket))
 
     {:ok,
      if connected?(socket) do
-       #:timer.send_interval(1000, self(), :tick)
-        #dbg("Socket connected")
+       dbg("Socket connected")
 
-        case Repo.insert(%GameState{counter: 0}) do
-          {:ok, game_state} ->
-            socket = assign(socket, %{game: game_state, plot1_1_harvestable: true})
-            push_redirect(socket, to: "/" <> game_state.id)
-
-          {:error, _changeset} ->
-            assign(socket, :error, "sorry")
-        end
+       socket = new_state(socket)
+       push_redirect(socket, to: "/" <> socket.assigns.game_state.id)
      else
-        #dbg("mounting - socket not connected")
-        socket
-     end
-    }
+       dbg("mounting - socket not connected")
+
+       socket = new_state(socket)
+       push_redirect(socket, to: "/" <> socket.assigns.game_state.id)
+     end}
   end
 
-  def handle_info(:tick, socket) do
-    #dbg("handle_tick")
-    {:noreply, assign(socket, %{game: socket.assigns.game})}
-
-  end
   def handle_info({:serverstate, state}, socket) do
-    {:noreply, socket |> assign(:serverstate, state) |> assign(:plot1_1_harvestable, true)}
-end
-def handle_state_transition() do
+    dbg(socket)
+    dbg("here")
 
-end
-  def handle_event("inc",_params,socket) do
-    #dbg("increment")
-    #dbg(socket.assigns.game)
+    {:noreply,
+     socket
+     |> assign(serverstate: state)
+     |> assign(plot1_1_harvestable: true)}
+  end
+
+  def handle_state_transition() do
+  end
+
+  def new_state(socket) do
+    socket = insert_game_state(socket)
+    dbg(socket)
+  end
+
+  def get_game_state(socket, id) do
+    game_state = Repo.get!(GameState, id)
+
+    socket
+    |> assign(game_state: game_state)
+  end
+
+  def insert_game_state(socket) do
+    case Repo.insert(%GameState{
+           counter: 0
+         }) do
+      {:ok, game_state} ->
+        dbg("inserted a new game state")
+
+        socket
+        |> assign(%{game_state: game_state, plot1_1_harvestable: true})
+
+      {:error, _changeset} ->
+        dbg("game state changeset error")
+        socket |> assign(:error, "game state changeset error")
+    end
+  end
+
+  def handle_event("inc", _params, socket) do
+    # dbg("increment")
+    # dbg(socket.assigns.game_state)
     new_state =
-      Ecto.Changeset.change(socket.assigns.game, %{
-        counter: socket.assigns.game.counter + 1
+      Ecto.Changeset.change(socket.assigns.game_state, %{
+        counter: socket.assigns.game_state.counter + 1
       })
 
     game_state = Repo.update!(new_state)
-    {:noreply, socket |> assign(:game, game_state) |> assign(:plot1_1_harvestable, false)}
+
+    {:noreply,
+     socket
+     |> assign(:game_state, game_state)
+     |> assign(:serverstate, socket.assigns.serverstate)
+     |> assign(:plot1_1_harvestable, false)}
   end
 
-
   def handle_params(%{"id" => id} = _params, _uri, socket) do
-    #dbg("handle_params id")
-    #dbg(id)
-    Phoenix.PubSub.subscribe(Ld52.PubSub,"serverstate")
-    game_state = Repo.get!(GameState, id)
+    # dbg("handle_params id")
+    # dbg(id)
+    Phoenix.PubSub.subscribe(Ld52.PubSub, "serverstate")
+    socket = socket |> get_game_state(id)
+    game_state = socket.assigns.game_state
+    # Repo.preload(game_state, [:plot_states])
+    # grid_state = game_state.plot_states
+    # dbg(grid_state)
     server_state = Repo.get!(ServerState, 1)
-    #dbg(game_state)
-    socket = assign(socket, %{game: game_state, serverstate: server_state})
-    #:timer.send_interval(1000, self(), :tick)
-    #dbg("done handling")
+    # dbg(game_state)
+    socket = assign(socket, %{game_state: game_state, serverstate: server_state})
+    # dbg("done handling")
     {:noreply, socket}
   end
 
   def handle_params(_params, _uri, socket) do
-    #dbg("handle_params empty")
+    # dbg("handle_params empty")
     {:noreply, socket}
   end
-
 end
